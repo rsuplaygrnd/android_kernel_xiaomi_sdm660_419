@@ -1359,10 +1359,6 @@ source "drivers/input/touchscreen/nt36xxx/Kconfig"
 
 source "drivers/input/touchscreen/nt36xxx_ASUS/Kconfig"
 
-source "drivers/input/touchscreen/nt36xxx_X00TD/Kconfig"
-
-source "drivers/input/touchscreen/nt36xxx_X01BD/Kconfig"
-
 config TOUCHSCREEN_HIMAX_CHIPSET
 	bool "Himax touchpanel CHIPSET"
 	depends on I2C
