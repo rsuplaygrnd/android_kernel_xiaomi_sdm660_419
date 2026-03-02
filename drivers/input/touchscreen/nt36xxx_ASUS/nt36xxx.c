@@ -50,11 +50,6 @@ uint8_t esd_check = false;
 uint8_t esd_retry = 0;
 #endif /* #if NVT_TOUCH_ESD_PROTECT */
 
-#if NVT_TOUCH_EXT_PROC
-extern int32_t nvt_extra_proc_init(void);
-extern void nvt_extra_proc_deinit(void);
-#endif
-
 #if NVT_POWER_SOURCE_CUST_EN
 static int nvt_lcm_bias_power_init(struct nvt_ts_data *data)
 {
@@ -171,11 +166,6 @@ static int nvt_lcm_power_source_ctrl(struct nvt_ts_data *data, int enable)
 		NVT_ERR("Regulator lcm_ibb or lcm_lab is invalid");
 	return 0;
 }
-#endif
-
-#if NVT_TOUCH_MP
-extern int32_t nvt_mp_proc_init(void);
-extern void nvt_mp_proc_deinit(void);
 #endif
 
 struct nvt_ts_data *ts;
@@ -893,12 +883,16 @@ void nvt_ts_wakeup_gesture_report(uint8_t gesture_id, uint8_t *data)
 	if ((gesture_id == DATA_PROTOCOL) && (func_type == FUNCPAGE_GESTURE)) {
 		gesture_id = func_id;
 	} else if (gesture_id > DATA_PROTOCOL) {
+		#if 0
 		NVT_ERR("gesture_id %d is invalid, func_type=%d, func_id=%d\n",
 			gesture_id, func_type, func_id);
+		#endif
 		return;
 	}
 
+#if 0
 	NVT_LOG("gesture_id = %d\n", gesture_id);
+#endif
 
 	switch (gesture_id) {
 	case GESTURE_WORD_C:
@@ -1640,22 +1634,6 @@ static int32_t nvt_ts_probe(struct i2c_client *client,
 	}
 #endif
 
-#if NVT_TOUCH_EXT_PROC
-	ret = nvt_extra_proc_init();
-	if (ret != 0) {
-		NVT_ERR("nvt extra proc init failed. ret=%d\n", ret);
-		goto err_extra_proc_init_failed;
-	}
-#endif
-
-#if NVT_TOUCH_MP
-	ret = nvt_mp_proc_init();
-	if (ret != 0) {
-		NVT_ERR("nvt mp proc init failed. ret=%d\n", ret);
-		goto err_mp_proc_init_failed;
-	}
-#endif
-
 #if WAKEUP_GESTURE
 	err = create_gesture_node();
 	nvt_gesture_mode_proc = proc_create(NVT_GESTURE_MODE, 0666, NULL,
@@ -1712,14 +1690,6 @@ err_register_fb_notif_failed:
 #elif defined(CONFIG_HAS_EARLYSUSPEND)
 	unregister_early_suspend(&ts->early_suspend);
 err_register_early_suspend_failed:
-#endif
-#if NVT_TOUCH_MP
-	nvt_mp_proc_deinit();
-err_mp_proc_init_failed:
-#endif
-#if NVT_TOUCH_EXT_PROC
-	nvt_extra_proc_deinit();
-err_extra_proc_init_failed:
 #endif
 #if NVT_TOUCH_PROC
 	nvt_flash_proc_deinit();
@@ -1796,12 +1766,6 @@ static int32_t nvt_ts_remove(struct i2c_client *client)
 	unregister_early_suspend(&ts->early_suspend);
 #endif
 
-#if NVT_TOUCH_MP
-	nvt_mp_proc_deinit();
-#endif
-#if NVT_TOUCH_EXT_PROC
-	nvt_extra_proc_deinit();
-#endif
 #if NVT_TOUCH_PROC
 	nvt_flash_proc_deinit();
 #endif
@@ -1868,12 +1832,6 @@ static void nvt_ts_shutdown(struct i2c_client *client)
 	unregister_early_suspend(&ts->early_suspend);
 #endif
 
-#if NVT_TOUCH_MP
-	nvt_mp_proc_deinit();
-#endif
-#if NVT_TOUCH_EXT_PROC
-	nvt_extra_proc_deinit();
-#endif
 #if NVT_TOUCH_PROC
 	nvt_flash_proc_deinit();
 #endif
