@@ -30,8 +30,6 @@
 #include <linux/earlysuspend.h>
 #endif
 
-#include "nt36xxx_mem_map.h"
-
 #define NVT_DEBUG 0
 
 //---GPIO number---

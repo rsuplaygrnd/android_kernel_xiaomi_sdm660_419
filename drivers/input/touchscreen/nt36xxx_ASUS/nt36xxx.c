@@ -37,7 +37,9 @@
 #include <linux/earlysuspend.h>
 #endif
 
+#include "nt36xxx_mem_map.h"
 #include "nt36xxx.h"
+
 #if NVT_TOUCH_ESD_PROTECT
 #include <linux/jiffies.h>
 #endif /* #if NVT_TOUCH_ESD_PROTECT */
