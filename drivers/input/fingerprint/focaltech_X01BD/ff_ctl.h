@@ -42,74 +42,73 @@
 //#define FF_IOVCC_GPIO
 
 typedef struct {
-    unsigned int code;
-    int value;
+	unsigned int code;
+	int value;
 } ff_key_event_t;
 
 typedef struct {
-    /* Using asynchronous notification mechanism instead of NETLINK. */
-    bool enable_fasync;
+	/* Using asynchronous notification mechanism instead of NETLINK. */
+	bool enable_fasync;
 
-    /* Gesture(Key emulation & Navigation) key codes. */
-    int32_t keycode_nav_left;
-    int32_t keycode_nav_right;
-    int32_t keycode_nav_up;
-    int32_t keycode_nav_down;
-    int32_t keycode_double_click;
-    int32_t keycode_click;
-    int32_t keycode_long_press;
-    int32_t keycode_simulation;
+	/* Gesture(Key emulation & Navigation) key codes. */
+	int32_t keycode_nav_left;
+	int32_t keycode_nav_right;
+	int32_t keycode_nav_up;
+	int32_t keycode_nav_down;
+	int32_t keycode_double_click;
+	int32_t keycode_click;
+	int32_t keycode_long_press;
+	int32_t keycode_simulation;
 
-    /* For '/dev/spidevB.C' of REE-Emulation. */
-    bool enable_spidev;
-    int32_t spidev_bus;
-    int32_t spidev_c_s;
+	/* For '/dev/spidevB.C' of REE-Emulation. */
+	bool enable_spidev;
+	int32_t spidev_bus;
+	int32_t spidev_c_s;
 
-    /* For obsolete driver that doesn't support device tree. */
-    int32_t gpio_mosi_pin;
-    int32_t gpio_miso_pin;
-    int32_t gpio_ck_pin;
-    int32_t gpio_cs_pin;
-    int32_t gpio_rst_pin;
-    int32_t gpio_int_pin;
-    int32_t gpio_power_pin;
-    int32_t gpio_iovcc_pin;
+	/* For obsolete driver that doesn't support device tree. */
+	int32_t gpio_mosi_pin;
+	int32_t gpio_miso_pin;
+	int32_t gpio_ck_pin;
+	int32_t gpio_cs_pin;
+	int32_t gpio_rst_pin;
+	int32_t gpio_int_pin;
+	int32_t gpio_power_pin;
+	int32_t gpio_iovcc_pin;
 
-
-    /* Logging driver to logcat through uevent mechanism. */
-    int32_t log_level;
-    bool logcat_driver;
+	/* Logging driver to logcat through uevent mechanism. */
+	int32_t log_level;
+	bool logcat_driver;
 } ff_driver_config_t;
 
 /* Magic code for IOCTL-subsystem, 'f'(0x66) means '[F]ocalTech'. */
 #define FF_IOC_MAGIC 'f'
 
 /* Allocate/Release driver resource (GPIO/SPI etc.). */
-#define FF_IOC_INIT_DRIVER      _IO(FF_IOC_MAGIC, 0x00)
-#define FF_IOC_FREE_DRIVER      _IO(FF_IOC_MAGIC, 0x01)
+#define FF_IOC_INIT_DRIVER _IO(FF_IOC_MAGIC, 0x00)
+#define FF_IOC_FREE_DRIVER _IO(FF_IOC_MAGIC, 0x01)
 
 /* HW reset the fingerprint module. */
-#define FF_IOC_RESET_DEVICE     _IO(FF_IOC_MAGIC, 0x02)
+#define FF_IOC_RESET_DEVICE _IO(FF_IOC_MAGIC, 0x02)
 
 /* Low-level IRQ control. */
-#define FF_IOC_ENABLE_IRQ       _IO(FF_IOC_MAGIC, 0x03)
-#define FF_IOC_DISABLE_IRQ      _IO(FF_IOC_MAGIC, 0x04)
+#define FF_IOC_ENABLE_IRQ _IO(FF_IOC_MAGIC, 0x03)
+#define FF_IOC_DISABLE_IRQ _IO(FF_IOC_MAGIC, 0x04)
 
 /* SPI bus clock control, for power-saving purpose. */
-#define FF_IOC_ENABLE_SPI_CLK   _IO(FF_IOC_MAGIC, 0x05)
-#define FF_IOC_DISABLE_SPI_CLK  _IO(FF_IOC_MAGIC, 0x06)
+#define FF_IOC_ENABLE_SPI_CLK _IO(FF_IOC_MAGIC, 0x05)
+#define FF_IOC_DISABLE_SPI_CLK _IO(FF_IOC_MAGIC, 0x06)
 
 /* Fingerprint module power control. */
-#define FF_IOC_ENABLE_POWER     _IO(FF_IOC_MAGIC, 0x07)
-#define FF_IOC_DISABLE_POWER    _IO(FF_IOC_MAGIC, 0x08)
+#define FF_IOC_ENABLE_POWER _IO(FF_IOC_MAGIC, 0x07)
+#define FF_IOC_DISABLE_POWER _IO(FF_IOC_MAGIC, 0x08)
 
 /* Androind system-wide key event, for navigation purpose. */
 #define FF_IOC_REPORT_KEY_EVENT _IOW(FF_IOC_MAGIC, 0x09, ff_key_event_t)
 
 /* Sync 'ff_driver_config_t', the driver configuration. */
-#define FF_IOC_SYNC_CONFIG     _IOWR(FF_IOC_MAGIC, 0x0a, ff_driver_config_t)
+#define FF_IOC_SYNC_CONFIG _IOWR(FF_IOC_MAGIC, 0x0a, ff_driver_config_t)
 
 /* Query the driver version string. */
-#define FF_IOC_GET_VERSION      _IOR(FF_IOC_MAGIC, 0x0b, const char)
+#define FF_IOC_GET_VERSION _IOR(FF_IOC_MAGIC, 0x0b, const char)
 
 #endif /* __FF_CTRL_API_H__ */

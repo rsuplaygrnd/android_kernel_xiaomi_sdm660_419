@@ -60,7 +60,8 @@ int ff_spi_write_buf(const void *tx_buf, int tx_len);
  * @return
  *  ff_err_t code.
  */
-int ff_spi_write_then_read_buf(const void *tx_buf, int tx_len, void *rx_buf, int rx_len);
+int ff_spi_write_then_read_buf(const void *tx_buf, int tx_len, void *rx_buf,
+			       int rx_len);
 
 #ifdef __cplusplus
 }
