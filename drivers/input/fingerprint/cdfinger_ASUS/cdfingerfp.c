@@ -555,7 +555,7 @@ static int cdfinger_probe(struct platform_device *pdev)
 	cdfinger_parse_dts(dev, cdfingerdev);
 
 	cdfingerdev->cdfinger_lock =
-		wakeup_source_register("cdfinger_wakelock");
+		wakeup_source_register(NULL, "cdfinger_wakelock");
 	if (!cdfingerdev->cdfinger_lock) {
 		status = -ENOMEM;
 		goto err_free_mem;
