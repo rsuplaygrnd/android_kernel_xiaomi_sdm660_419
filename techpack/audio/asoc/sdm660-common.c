@@ -232,15 +232,9 @@ static struct wcd_mbhc_config mbhc_cfg = {
 	.swap_gnd_mic = NULL,
 	.hs_ext_micbias = true,
 	.key_code[0] = KEY_MEDIA,
-#ifndef CONFIG_MACH_LONGCHEER
 	.key_code[1] = KEY_VOICECOMMAND,
 	.key_code[2] = KEY_VOLUMEUP,
 	.key_code[3] = KEY_VOLUMEDOWN,
-#else
-	.key_code[1] = KEY_VOLUMEUP,
-	.key_code[2] = KEY_VOLUMEDOWN,
-	.key_code[3] = 0,
-#endif
 	.key_code[4] = 0,
 	.key_code[5] = 0,
 	.key_code[6] = 0,
@@ -268,11 +262,7 @@ static struct dev_config mi2s_rx_cfg[] = {
 };
 
 static struct dev_config mi2s_tx_cfg[] = {
-#if defined(CONFIG_SND_I2S_PRIMARY)
-	[PRIM_MI2S] = {SAMPLING_RATE_48KHZ, SNDRV_PCM_FORMAT_S16_LE, 2},
-#else
 	[PRIM_MI2S] = {SAMPLING_RATE_48KHZ, SNDRV_PCM_FORMAT_S16_LE, 1},
-#endif
 	[SEC_MI2S]  = {SAMPLING_RATE_48KHZ, SNDRV_PCM_FORMAT_S16_LE, 1},
 	[TERT_MI2S] = {SAMPLING_RATE_48KHZ, SNDRV_PCM_FORMAT_S16_LE, 1},
 	[QUAT_MI2S] = {SAMPLING_RATE_48KHZ, SNDRV_PCM_FORMAT_S16_LE, 1},
@@ -4335,14 +4325,9 @@ int msm_common_be_hw_params_fixup(struct snd_soc_pcm_runtime *rtd,
 		break;
 
 	case MSM_BACKEND_DAI_PRI_MI2S_TX:
-#if defined(CONFIG_SND_SOC_MAX98937)
-		rate->min = rate->max = SAMPLING_RATE_48KHZ;
-		channels->min = channels->max = 2;
-#else
 		rate->min = rate->max = mi2s_tx_cfg[PRIM_MI2S].sample_rate;
 		channels->min = channels->max =
 			mi2s_tx_cfg[PRIM_MI2S].channels;
-#endif
 		param_set_mask(params, SNDRV_PCM_HW_PARAM_FORMAT,
 			       mi2s_tx_cfg[PRIM_MI2S].bit_format);
 		break;
