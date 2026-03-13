@@ -596,6 +596,10 @@ struct __test_flex_array {
 
 static int __init test_overflow_size_helpers(void)
 {
+	struct __test_flex_array *obj;
+	int count = 0;
+	int err = 0;
+	int var;
 
 #define check_one_size_helper(expected, func, args...)	({	\
 	bool __failure = false;					\
@@ -653,17 +657,6 @@ static int __init test_overflow_size_helpers(void)
 				     flex_array_size, obj, data, var++);
 	err |= check_one_size_helper(5 * sizeof(*obj->data),
 				     flex_array_size, obj, data, var++);
-<<<<<<< HEAD
-	err |= check_one_size_helper(0, flex_array_size, obj, data, 0 + unconst);
-	err |= check_one_size_helper(sizeof(*obj->data),
-				     flex_array_size, obj, data, 1 + unconst);
-	err |= check_one_size_helper(7 * sizeof(*obj->data),
-				     flex_array_size, obj, data, 7 + unconst);
-	err |= check_one_size_helper(SIZE_MAX,
-				     flex_array_size, obj, data, -1 + unconst);
-	err |= check_one_size_helper(SIZE_MAX,
-				     flex_array_size, obj, data, SIZE_MAX - 4 + unconst);
-=======
 	err |= check_one_size_helper(0, flex_array_size, obj, data, 0);
 	err |= check_one_size_helper(sizeof(*obj->data),
 				     flex_array_size, obj, data, 1);
@@ -673,22 +666,12 @@ static int __init test_overflow_size_helpers(void)
 				     flex_array_size, obj, data, -1);
 	err |= check_one_size_helper(SIZE_MAX,
 				     flex_array_size, obj, data, SIZE_MAX - 4);
->>>>>>> f85a226d2aa2fbfefb128b7c95eacce4f34924e2
 
 	var = 4;
 	err |= check_one_size_helper(sizeof(*obj) + (4 * sizeof(*obj->data)),
 				     struct_size, obj, data, var++);
 	err |= check_one_size_helper(sizeof(*obj) + (5 * sizeof(*obj->data)),
 				     struct_size, obj, data, var++);
-<<<<<<< HEAD
-	err |= check_one_size_helper(sizeof(*obj), struct_size, obj, data, 0 + unconst);
-	err |= check_one_size_helper(sizeof(*obj) + sizeof(*obj->data),
-				     struct_size, obj, data, 1 + unconst);
-	err |= check_one_size_helper(SIZE_MAX,
-				     struct_size, obj, data, -3 + unconst);
-	err |= check_one_size_helper(SIZE_MAX,
-				     struct_size, obj, data, SIZE_MAX - 3 + unconst);
-=======
 	err |= check_one_size_helper(sizeof(*obj), struct_size, obj, data, 0);
 	err |= check_one_size_helper(sizeof(*obj) + sizeof(*obj->data),
 				     struct_size, obj, data, 1);
@@ -696,7 +679,6 @@ static int __init test_overflow_size_helpers(void)
 				     struct_size, obj, data, -3);
 	err |= check_one_size_helper(SIZE_MAX,
 				     struct_size, obj, data, SIZE_MAX - 3);
->>>>>>> f85a226d2aa2fbfefb128b7c95eacce4f34924e2
 
 	pr_info("%d overflow size helper tests finished\n", count);
 
