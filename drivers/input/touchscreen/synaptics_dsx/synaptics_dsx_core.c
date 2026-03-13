@@ -36,6 +36,7 @@
 #include <linux/slab.h>
 #include <linux/interrupt.h>
 #include <linux/delay.h>
+#include <linux/i2c.h>
 #include <linux/input.h>
 #include <linux/gpio.h>
 #include <linux/platform_device.h>
@@ -4568,7 +4569,7 @@ EXPORT_SYMBOL(synaptics_rmi4_new_function);
 
 static int synaptics_rmi4_probe(struct platform_device *pdev)
 {
-	int retval = 0;
+	int retval;
 	struct synaptics_rmi4_data *rmi4_data;
 	const struct synaptics_dsx_hw_interface *hw_if;
 	const struct synaptics_dsx_board_data *bdata;
@@ -5338,8 +5339,10 @@ exit:
 
 #ifdef CONFIG_PM
 static const struct dev_pm_ops synaptics_rmi4_dev_pm_ops = {
+#if !defined(CONFIG_DRM) && !defined(CONFIG_FB)
 	.suspend = synaptics_rmi4_suspend,
 	.resume = synaptics_rmi4_resume,
+#endif
 };
 #endif
 
