@@ -333,20 +333,6 @@ struct msm_vcm_id_info_t {
 };
 #endif
 
-<<<<<<< HEAD
-#if defined(CONFIG_XIAOMI_NEW_CAMERA_BLOBS) || defined(CONFIG_XIAOMI_OLD_CAMERA_BLOBS)
-struct msm_lens_id_info_t {
-	unsigned short eeprom_slave_addr;
-	unsigned short lens_id_addr;
-	enum msm_camera_i2c_reg_addr_type addr_type;
-	unsigned short lens_id;
-	enum msm_camera_i2c_data_type data_type;
-	enum msm_cci_i2c_master_t cci_i2c_master;
-};
-#endif
-
-=======
->>>>>>> parent of 011defebfdd9 (camera_v2/legacy: Add support for new cam blobs)
 struct msm_camera_sensor_slave_info {
 	char sensor_name[32];
 	char eeprom_name[32];
