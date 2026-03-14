@@ -162,7 +162,7 @@ enum {
 };
 
 enum tasha_sido_voltage {
-	SIDO_VOLTAGE_SVS_MV = 985,
+	SIDO_VOLTAGE_SVS_MV = 950,
 	SIDO_VOLTAGE_NOMINAL_MV = 1100,
 };
 
@@ -1454,9 +1454,8 @@ static int tasha_micbias_control(struct snd_soc_component *component,
 					0xC0, 0x80);
 		break;
 	case MICB_PULLUP_DISABLE:
-		tasha->pullup_ref[micb_index]--;
-		if (tasha->pullup_ref[micb_index] < 0)
-			tasha->pullup_ref[micb_index] = 0;
+		if (tasha->pullup_ref[micb_index] > 0)
+			tasha->pullup_ref[micb_index]--;
 		if ((tasha->pullup_ref[micb_index] == 0) &&
 		    (tasha->micb_ref[micb_index] == 0))
 			snd_soc_component_update_bits(component, micb_reg,

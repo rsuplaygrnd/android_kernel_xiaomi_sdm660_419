@@ -31,7 +31,6 @@
 #include <dsp/q6lsm.h>
 #include <dsp/q6core.h>
 #include <dsp/q6common.h>
-#include <dsp/audio_cal_utils.h>
 
 #include "msm-pcm-routing-v2.h"
 #include "msm-pcm-routing-devdep.h"
