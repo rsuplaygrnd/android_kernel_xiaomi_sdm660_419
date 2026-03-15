@@ -37,7 +37,7 @@ void wcd_mbhc_jack_report(struct wcd_mbhc *mbhc,
 		hph_state = 1;
 	else
 		hph_state = 0;
-		
+
 	snd_soc_jack_report(jack, status, mask);
 }
 EXPORT_SYMBOL(wcd_mbhc_jack_report);

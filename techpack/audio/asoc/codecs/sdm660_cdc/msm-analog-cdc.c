@@ -3144,7 +3144,7 @@ static const struct snd_soc_dapm_route audio_map[] = {
 	/* Headset (RX MIX1 and RX MIX2) */
 	{"HEADPHONE", NULL, "HPHL PA"},
 	{"HEADPHONE", NULL, "HPHR PA"},
-	
+
 	{"Ext Hph", NULL, "Ext Hph Switch"},
 	{"Ext Hph Switch", "On", "HPHL PA"},
 	{"Ext Hph Switch", "On", "HPHR PA"},

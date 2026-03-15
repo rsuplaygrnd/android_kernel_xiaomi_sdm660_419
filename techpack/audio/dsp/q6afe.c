@@ -5343,7 +5343,9 @@ static int q6afe_send_enc_config(u16 port_id,
 		if (ret) {
 			pr_err("%s: AFE_ENCODER_PARAM_ID_ENABLE_SCRAMBLING for port 0x%x failed %d\n",
 				__func__, port_id, ret);
+#ifndef CONFIG_ARCH_SDM660
 			goto exit;
+#endif
 		}
 	}
 #endif
@@ -9584,7 +9586,6 @@ static int afe_get_sp_th_vi_v_vali_data(
 
 	mutex_lock(&this_afe.afe_cmd_lock);
 	memset(&param_hdr, 0, sizeof(param_hdr));
-	memset(th_vi_v_vali, 0, sizeof(*th_vi_v_vali));
 
 	param_hdr.module_id = AFE_MODULE_SPEAKER_PROTECTION_V2_TH_VI;
 	param_hdr.instance_id = INSTANCE_ID_0;

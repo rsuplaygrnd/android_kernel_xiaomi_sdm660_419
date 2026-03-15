@@ -66,6 +66,8 @@ config SND_SOC_CSRA66X0
 	tristate "SND_SOC_CSRA66X0"
 config SND_SOC_DIGITAL_CDC
 	tristate "SND_SOC_DIGITAL_CDC"
+config SND_SOC_DIGITAL_CDC_LEGACY
+	tristate "SND_SOC_DIGITAL_CDC_LEGACY"
 config SND_SOC_EP92
 	tristate "SND_SOC_EP92"
 config SND_SOC_EXT_CODEC
@@ -134,6 +136,10 @@ config SND_SOC_WCD_MBHC_LEGACY
 	tristate "SND_SOC_WCD_MBHC_LEGACY"
 config SND_SOC_WCD_SPI
 	tristate "SND_SOC_WCD_SPI"
+config WCD_SPI_KZALLOC
+	tristate "WCD_SPI_KZALLOC"
+config WCD_SPI_DMA_MASKING
+	tristate "WCD_SPI_DMA_MASKING"
 config SND_SOC_WSA881X
 	tristate "SND_SOC_WSA881X"
 config SOUNDWIRE
@@ -154,12 +160,11 @@ config WCD9XXX_CODEC_CORE
 	tristate "WCD9XXX_CODEC_CORE"
 config WCD_DSP_GLINK
 	tristate "WCD_DSP_GLINK"
-config WCD_SPI_DMA_MASKING
-	tristate "WCD_SPI_DMA_MASKING"
 config WSA_MACRO
 	tristate "WSA_MACRO"
 config SOUND_CONTROL
-	bool "Sound Control for msm89xx"
+	tristate "SOUND_CONTROL"
+
 config SND_SOC_TFA9874
 	tristate "NXP Semiconductors TFA9874 audio amplifier"
 	depends on I2C
